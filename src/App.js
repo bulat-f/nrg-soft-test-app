@@ -1,29 +1,16 @@
 import React from 'react';
-import { useDispatch } from 'react-redux';
-import logo from './logo.svg';
-import './App.css';
+import { Container } from 'semantic-ui-react';
 
-function App() {
-  const dispatch = useDispatch();
+import { Subreddits } from 'components/Subredits';
+import { ArticlesList } from 'components/ArticlesList';
+
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <button onClick={() => dispatch({ type: 'SOME_ACTION' })}>Button</button>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Container>
+      <Subreddits />
+      <ArticlesList />
+    </Container>
   );
-}
+};
 
 export default App;

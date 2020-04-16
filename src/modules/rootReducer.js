@@ -1,10 +1,12 @@
-const rootReducer = (state = null, action) => {
-  switch (action.type) {
-    case 'SOME_ACTION':
-      return 'some action dispatched';
-    default:
-      return state;
-  }
-};
+import { combineReducers } from 'redux';
+
+import {
+  REDUCER_NAME as ARTICELS_REDUCER_NAME,
+  reducer as articlesReducer,
+} from './articles/reducer';
+
+const rootReducer = combineReducers({
+  [ARTICELS_REDUCER_NAME]: articlesReducer,
+});
 
 export default rootReducer;
