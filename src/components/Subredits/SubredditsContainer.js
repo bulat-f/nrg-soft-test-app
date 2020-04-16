@@ -1,14 +1,19 @@
 import { connect } from 'react-redux';
+import { random } from 'lodash';
 import { fetchArticleRequest, fetchArticleSuccess } from 'modules/articles';
+import { fetchArticles } from 'api';
 
 import { SubredditsView } from './SubredditsView';
 
-let id = 1;
-
 const mapDispatchToProps = (dispatch) => ({
-  fetchArticle: (subreddit) => {
+  fetchArticle: async (subreddit) => {
     dispatch(fetchArticleRequest(subreddit));
-    dispatch(fetchArticleSuccess({ id: id++, title: `${subreddit} ${id}` }));
+    const {
+      data: { dist, children },
+    } = await fetchArticles(subreddit);
+    const { data } = children[random(dist - 1)];
+
+    dispatch(fetchArticleSuccess(data));
   },
 });
 
