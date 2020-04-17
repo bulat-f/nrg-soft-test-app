@@ -1,12 +1,23 @@
 import { createStore, applyMiddleware, compose } from 'redux';
 import createSagaMiddleware from 'redux-saga';
+import { persistStore, persistReducer } from 'redux-persist';
+import storage from 'redux-persist/lib/storage';
 
 import rootReducer from 'modules/rootReducer';
 import rootSaga from 'modules/rootSaga';
 
+import { REDUCER_NAME } from 'modules/subreddits/reducer'
+
 function configureStore(initialState) {
   const sagaMiddleware = createSagaMiddleware();
   const middlewares = [sagaMiddleware];
+
+  const persistConfig = {
+    key: 'root',
+    storage,
+    blacklist: [REDUCER_NAME],
+  };
+  const persistedReducer = persistReducer(persistConfig, rootReducer);
 
   let composeEnhancers = compose;
   if (process.env.NODE_ENV === 'development') {
@@ -16,14 +27,15 @@ function configureStore(initialState) {
   }
 
   const store = createStore(
-    rootReducer,
+    persistedReducer,
     initialState,
     composeEnhancers(applyMiddleware(...middlewares)),
   );
+  const persistor = persistStore(store);
 
   sagaMiddleware.run(rootSaga);
 
-  return store;
+  return { store, persistor };
 }
 
-export const store = configureStore();
+export const { store, persistor } = configureStore();

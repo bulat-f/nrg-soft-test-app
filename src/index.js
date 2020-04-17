@@ -7,10 +7,10 @@ import Root from 'Root';
 import App from 'App';
 
 import * as serviceWorker from './serviceWorker';
-import { store } from 'store/configureStore';
+import { store, persistor } from 'store/configureStore';
 
 ReactDOM.render(
-  <Root store={store}>
+  <Root store={store} persistor={persistor}>
     <App />
   </Root>,
   document.getElementById('root'),
