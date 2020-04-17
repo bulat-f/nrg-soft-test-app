@@ -1,25 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import styled from 'styled-components';
-
-const Subreddit = styled.div`
-  padding: 8px;
-  margin: 8px 0;
-  width: 160px;
-  background: #ccc;
-  color: #fff;
-  font-weight: bold;
-  text-align: center;
-  cursor: pointer;
-  &:hover {
-    background: #ccd;
-  }
-`;
+import { Subreddit } from './Subreddit';
 
 export const SubredditsView = ({ fetchPost }) => (
   <div>
-    <Subreddit onClick={() => fetchPost('react')}>React</Subreddit>
-    <Subreddit onClick={() => fetchPost('angular')}>Angular</Subreddit>
+    <Subreddit name="frontend" fetchPost={fetchPost} />
+    <Subreddit name="reactjs" fetchPost={fetchPost} />
+    <Subreddit name="vuejs" fetchPost={fetchPost} />
+    <Subreddit name="angular" fetchPost={fetchPost} />
   </div>
 );
 

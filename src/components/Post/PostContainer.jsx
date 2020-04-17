@@ -5,7 +5,7 @@ import { removePost, likePost } from 'modules/posts';
 import { PostView } from './PostView';
 
 const PostContainer = ({ id, likePost, removePost, ...postProps }) => {
-  const handleLike = useCallback(() => likePost(id), [id]);
+  const handleLike = useCallback(() => likePost(id), [id, likePost]);
   const handleRemove = useCallback(() => removePost(id), [id, removePost]);
   return <PostView {...postProps} handleLike={handleLike} handleRemove={handleRemove} />;
 };
