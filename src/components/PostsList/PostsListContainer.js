@@ -1,12 +1,12 @@
 import { connect } from 'react-redux';
 import { getAllArticles, getArticleIsLoading } from 'modules/articles';
 
-import { ArticlesListView } from './ArticlesListView';
+import { PostsListView } from './PostsListView';
 
 const mapStateToProps = (state) => ({
-  articles: getAllArticles(state),
+  posts: getAllArticles(state),
   isLoading: getArticleIsLoading(state),
 });
 const mapDispatchToProps = null;
 
-export const ArticlesListContainer = connect(mapStateToProps, mapDispatchToProps)(ArticlesListView);
+export const PostsListContainer = connect(mapStateToProps, mapDispatchToProps)(PostsListView);

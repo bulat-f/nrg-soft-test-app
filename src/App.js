@@ -2,13 +2,13 @@ import React from 'react';
 import { Container } from 'semantic-ui-react';
 
 import { Subreddits } from 'components/Subredits';
-import { ArticlesList } from 'components/ArticlesList';
+import { PostsList } from 'components/PostsList';
 
 const App = () => {
   return (
     <Container>
       <Subreddits />
-      <ArticlesList />
+      <PostsList />
     </Container>
   );
 };

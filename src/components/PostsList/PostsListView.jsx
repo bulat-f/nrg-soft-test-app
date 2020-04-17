@@ -1,19 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Card, List, Placeholder } from 'semantic-ui-react';
+import { Post } from 'components/Post';
 
-export const ArticlesListView = ({ articles, isLoading }) => (
+export const PostsListView = ({ posts, isLoading }) => (
   <Card fluid>
     <Card.Content>
       <List divided relaxed>
-        {articles.map((article) => (
-          <List.Item key={article.id}>
-            <List.Icon name="reddit" size="large" verticalAlign="middle" />
-            <List.Content>
-              <List.Header as="a">{article.title}</List.Header>
-              <List.Description as="a">{article.subreddit}</List.Description>
-            </List.Content>
-          </List.Item>
+        {posts.map((article) => (
+          <Post key={article.id} {...article} />
         ))}
         {isLoading && (
           <List.Item>
@@ -40,6 +35,6 @@ export const ArticlesListView = ({ articles, isLoading }) => (
   </Card>
 );
 
-ArticlesListView.propTypes = {
-  articles: PropTypes.array.isRequired,
+PostsListView.propTypes = {
+  posts: PropTypes.array.isRequired,
 };
