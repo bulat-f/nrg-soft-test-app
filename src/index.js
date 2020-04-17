@@ -10,11 +10,9 @@ import * as serviceWorker from './serviceWorker';
 import { store } from 'store/configureStore';
 
 ReactDOM.render(
-  <React.StrictMode>
-    <Root store={store}>
-      <App />
-    </Root>
-  </React.StrictMode>,
+  <Root store={store}>
+    <App />
+  </Root>,
   document.getElementById('root'),
 );
 

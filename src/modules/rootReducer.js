@@ -1,12 +1,12 @@
 import { combineReducers } from 'redux';
 
 import {
-  REDUCER_NAME as ARTICELS_REDUCER_NAME,
-  reducer as articlesReducer,
-} from './articles/reducer';
+  REDUCER_NAME as POSTS_REDUCER_NAME,
+  reducer as postsReducer,
+} from './posts/reducer';
 
 const rootReducer = combineReducers({
-  [ARTICELS_REDUCER_NAME]: articlesReducer,
+  [POSTS_REDUCER_NAME]: postsReducer,
 });
 
 export default rootReducer;

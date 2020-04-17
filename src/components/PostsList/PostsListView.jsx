@@ -6,6 +6,7 @@ import { Post } from 'components/Post';
 export const PostsListView = ({ posts, isLoading }) => (
   <Card fluid>
     <Card.Content>
+      {posts.length === 0 && !isLoading && <Card.Header textAlign="center">No posts loaded yet</Card.Header>}
       <List divided relaxed>
         {posts.map((article) => (
           <Post key={article.id} {...article} />

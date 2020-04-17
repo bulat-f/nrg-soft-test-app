@@ -1,18 +1,21 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { removePost, likePost } from 'modules/posts';
 import { PostView } from './PostView';
-import { useCallback } from 'react';
 
-export const PostContainer = ({ id, ...postProps }) => {
-  const handleLike = useCallback(() => {
-    console.log('Like', id);
-  }, [id]);
-  const handleRemove = useCallback(() => {
-    console.log('Remove', id);
-  }, [id]);
+const PostContainer = ({ id, likePost, removePost, ...postProps }) => {
+  const handleLike = useCallback(() => likePost(id), [id]);
+  const handleRemove = useCallback(() => removePost(id), [id, removePost]);
   return <PostView {...postProps} handleLike={handleLike} handleRemove={handleRemove} />;
 };
 
 PostContainer.propTypes = {
   id: PropTypes.string.isRequired,
 };
+
+const mapDispatchToProps = { likePost, removePost };
+
+const EnhancedPostContainer = connect(null, mapDispatchToProps)(PostContainer);
+
+export { EnhancedPostContainer as PostContainer };

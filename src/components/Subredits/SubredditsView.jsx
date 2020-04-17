@@ -16,13 +16,13 @@ const Subreddit = styled.div`
   }
 `;
 
-export const SubredditsView = ({ fetchArticle }) => (
+export const SubredditsView = ({ fetchPost }) => (
   <div>
-    <Subreddit onClick={() => fetchArticle('react')}>React</Subreddit>
-    <Subreddit onClick={() => fetchArticle('angular')}>Angular</Subreddit>
+    <Subreddit onClick={() => fetchPost('react')}>React</Subreddit>
+    <Subreddit onClick={() => fetchPost('angular')}>Angular</Subreddit>
   </div>
 );
 
 SubredditsView.propTypes = {
-  fetchArticle: PropTypes.func.isRequired,
+  fetchPost: PropTypes.func.isRequired,
 };

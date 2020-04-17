@@ -14,7 +14,7 @@ export const PostView = ({ title, url, subreddit, liked, handleLike, handleRemov
     <List.Icon verticalAlign="middle">
       <Button.Group basic>
         <Button icon onClick={handleLike}>
-          <Icon name={`thumbs up ${liked ? '' : 'outline'}`} />
+          <Icon name={`thumbs up ${liked ? '' : ' outline'}`} />
         </Button>
         <Button icon onClick={handleRemove}>
           <Icon name="trash alternate outline" />

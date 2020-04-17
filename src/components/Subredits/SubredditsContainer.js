@@ -1,11 +1,11 @@
 import { connect } from 'react-redux';
-import { fetchArticleRequest } from 'modules/articles';
+import { fetchPostRequest } from 'modules/posts';
 
 import { SubredditsView } from './SubredditsView';
 
 const mapDispatchToProps = (dispatch) => ({
-  fetchArticle: async (subreddit) => {
-    dispatch(fetchArticleRequest(subreddit));
+  fetchPost: async (subreddit) => {
+    dispatch(fetchPostRequest(subreddit));
   },
 });
 

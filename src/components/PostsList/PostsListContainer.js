@@ -1,11 +1,11 @@
 import { connect } from 'react-redux';
-import { getAllArticles, getArticleIsLoading } from 'modules/articles';
+import { getAllPosts, getPostIsLoading } from 'modules/posts';
 
 import { PostsListView } from './PostsListView';
 
 const mapStateToProps = (state) => ({
-  posts: getAllArticles(state),
-  isLoading: getArticleIsLoading(state),
+  posts: getAllPosts(state),
+  isLoading: getPostIsLoading(state),
 });
 const mapDispatchToProps = null;
 
