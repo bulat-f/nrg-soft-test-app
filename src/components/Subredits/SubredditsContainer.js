@@ -1,12 +1,12 @@
 import { connect } from 'react-redux';
 import { fetchPostRequest } from 'modules/posts';
+import { resizeContainer } from 'modules/subreddits';
 
 import { SubredditsView } from './SubredditsView';
 
-const mapDispatchToProps = (dispatch) => ({
-  fetchPost: async (subreddit) => {
-    dispatch(fetchPostRequest(subreddit));
-  },
-});
+const mapDispatchToProps = {
+  resizeContainer,
+  fetchPost: fetchPostRequest,
+};
 
 export const SubredditsContainer = connect(null, mapDispatchToProps)(SubredditsView);
