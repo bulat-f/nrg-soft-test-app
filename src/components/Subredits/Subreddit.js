@@ -1,16 +1,17 @@
-import React, { useCallback, useEffect, useRef, useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import PropTypes from 'prop-types';
 import styled, { keyframes } from 'styled-components';
 import { capitalize } from 'lodash';
 import { connect } from 'react-redux';
 import { addOne, togglePause, getPositionX } from 'modules/subreddits';
 
-const animation = keyframes`
+
+const animation = (distance) => keyframes`
   0% {
     transform: translateX(0);
   }
   50% {
-    transform: translateX(1000px);
+    transform: translateX(${distance}px);
   }
   100% {
     transform: translateX(0);
@@ -28,7 +29,7 @@ const Container = styled.div`
   font-weight: bold;
   text-align: center;
   cursor: pointer;
-  animation: ${animation} 8s linear 0s infinite;
+  animation: ${({ distance }) => animation(distance)} 8s linear 0s infinite;
   &:hover {
     background: #ccd;
     animation-play-state: paused;
@@ -36,18 +37,19 @@ const Container = styled.div`
   transition: all 0.25s linear;
 `;
 
-const SubredditView = ({ index, name }) => {
-  const ref = useRef();
+const SubredditView = ({ index, name, fetchPost }) => {
+  const [distance, setDistance] = useState(2000);
+  const measuredRef = useCallback((node) => {
+    if (node !== null) {
+      const selfWidth = node.getBoundingClientRect().width;
+      const containerWidth = node.parentElement.getBoundingClientRect().width;
+      setDistance(containerWidth - selfWidth);
+    }
+  }, []);
   const handleClick = useCallback(() => fetchPost(name), [name, fetchPost]);
 
   return (
-    <Container
-      ref={ref}
-      index={index}
-      // onMouseOver={handlePlay}
-      // onMouseOut={handlePause}
-      onClick={handleClick}
-    >
+    <Container ref={measuredRef} index={index} onClick={handleClick} distance={distance}>
       {capitalize(name)}
     </Container>
   );
