@@ -1,9 +1,21 @@
-import React, { useCallback, useEffect, useRef } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 import { capitalize } from 'lodash';
 import { connect } from 'react-redux';
 import { addOne, togglePause, getPositionX } from 'modules/subreddits';
+
+const animation = keyframes`
+  0% {
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(1000px);
+  }
+  100% {
+    transform: translateX(0);
+  }
+`;
 
 const Container = styled.div`
   position: absolute;
@@ -16,29 +28,25 @@ const Container = styled.div`
   font-weight: bold;
   text-align: center;
   cursor: pointer;
+  animation: ${animation} 8s linear 0s infinite;
   &:hover {
     background: #ccd;
+    animation-play-state: paused;
   }
   transition: all 0.25s linear;
 `;
 
-const SubredditView = ({ index, name, positionX, addOne, togglePause, fetchPost }) => {
-  const handleTogglePause = useCallback(() => togglePause(name), [name, togglePause]);
-  const handleClick = useCallback(() => fetchPost(name), [name, fetchPost]);
+const SubredditView = ({ index, name }) => {
   const ref = useRef();
-
-  useEffect(() => {
-    addOne(name, ref.current.parentElement.offsetWidth);
-  }, [name, addOne, ref]);
+  const handleClick = useCallback(() => fetchPost(name), [name, fetchPost]);
 
   return (
     <Container
       ref={ref}
       index={index}
-      onMouseOver={handleTogglePause}
-      onMouseOut={handleTogglePause}
+      // onMouseOver={handlePlay}
+      // onMouseOut={handlePause}
       onClick={handleClick}
-      style={{ left: positionX }}
     >
       {capitalize(name)}
     </Container>

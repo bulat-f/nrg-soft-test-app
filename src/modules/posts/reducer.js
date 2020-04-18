@@ -1,4 +1,5 @@
 import { combineReducers } from 'redux';
+import undoable from 'redux-undo';
 import { omit } from 'lodash';
 import { FETCH_REQUEST, FETCH_SUCCESS, FETCH_FAILURE, REMOVE, LIKE } from './actionTypes';
 
@@ -8,10 +9,6 @@ const byId = (state = {}, action) => {
   switch (action.type) {
     case FETCH_SUCCESS:
       return { ...state, [action.payload.id]: action.payload };
-    case LIKE: {
-      const post = state[action.payload.id];
-      return { ...state, [action.payload.id]: { ...post, liked: !post.liked } };
-    }
     case REMOVE:
       return omit(state, action.payload.id);
     default:
@@ -32,6 +29,17 @@ const allIds = (state = [], action) => {
   }
 };
 
+const likes = (state = {}, action) => {
+  switch (action.type) {
+    case LIKE: {
+      const prevState = state[action.payload.id];
+      return { ...state, [action.payload.id]: !prevState };
+    }
+    default:
+      return state;
+  }
+};
+
 const ui = (state = { isLoading: false }, action) => {
   switch (action.type) {
     case FETCH_REQUEST:
@@ -44,4 +52,11 @@ const ui = (state = { isLoading: false }, action) => {
   }
 };
 
-export const reducer = combineReducers({ byId, allIds, ui });
+const undoConfig = { limit: 10 };
+
+export const reducer = combineReducers({
+  byId: undoable(byId, undoConfig),
+  allIds: undoable(allIds, undoConfig),
+  likes,
+  ui,
+});
