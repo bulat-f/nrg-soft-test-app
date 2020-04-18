@@ -16,8 +16,6 @@ const animation = (distance) => keyframes`
 `;
 
 const Container = styled.div`
-  position: absolute;
-  top: ${({ index }) => `${index * 49}px`};
   padding: 8px;
   margin: 8px 0;
   width: 160px;
