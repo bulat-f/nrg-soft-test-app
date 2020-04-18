@@ -1,6 +1,7 @@
 import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { Provider } from 'react-redux';
+import { PersistGate } from 'redux-persist/integration/react';
 import { createGlobalStyle } from 'styled-components';
 
 const GlobalStyle = createGlobalStyle`
@@ -15,17 +16,20 @@ const GlobalStyle = createGlobalStyle`
   }
 `;
 
-const Root = ({ store, children }) => (
+const Root = ({ store, persistor, children }) => (
   <Provider store={store}>
-    <Fragment>
-      <GlobalStyle />
-      {children}
-    </Fragment>
+    <PersistGate loading={null} persistor={persistor}>
+      <Fragment>
+        <GlobalStyle />
+        {children}
+      </Fragment>
+    </PersistGate>
   </Provider>
 );
 
 Root.propTypes = {
   store: PropTypes.object.isRequired,
+  persistor: PropTypes.object.isRequired,
   children: PropTypes.element.isRequired,
 };
 

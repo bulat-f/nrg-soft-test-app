@@ -6,8 +6,6 @@ import storage from 'redux-persist/lib/storage';
 import rootReducer from 'modules/rootReducer';
 import rootSaga from 'modules/rootSaga';
 
-import { REDUCER_NAME } from 'modules/subreddits/reducer'
-
 function configureStore(initialState) {
   const sagaMiddleware = createSagaMiddleware();
   const middlewares = [sagaMiddleware];
@@ -15,7 +13,6 @@ function configureStore(initialState) {
   const persistConfig = {
     key: 'root',
     storage,
-    blacklist: [REDUCER_NAME],
   };
   const persistedReducer = persistReducer(persistConfig, rootReducer);
 

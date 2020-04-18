@@ -2,9 +2,6 @@ import React, { useCallback, useState } from 'react';
 import PropTypes from 'prop-types';
 import styled, { keyframes } from 'styled-components';
 import { capitalize } from 'lodash';
-import { connect } from 'react-redux';
-import { addOne, togglePause, getPositionX } from 'modules/subreddits';
-
 
 const animation = (distance) => keyframes`
   0% {
@@ -64,9 +61,4 @@ SubredditView.propTypes = {
   fetchPost: PropTypes.func.isRequired,
 };
 
-const mapStateToProps = (state, { name }) => ({ positionX: getPositionX(state, name) });
-const mapDispatchToProps = { addOne, togglePause };
-
-const SubredditContainer = connect(mapStateToProps, mapDispatchToProps)(SubredditView);
-
-export { SubredditContainer as Subreddit };
+export { SubredditView as Subreddit };
