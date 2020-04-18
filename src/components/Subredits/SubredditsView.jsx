@@ -21,5 +21,4 @@ export const SubredditsView = ({ fetchPost }) => (
 
 SubredditsView.propTypes = {
   fetchPost: PropTypes.func.isRequired,
-  resizeContainer: PropTypes.func.isRequired,
 };

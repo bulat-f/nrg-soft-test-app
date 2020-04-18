@@ -53,9 +53,6 @@ const SubredditView = ({ index, name, fetchPost }) => {
 SubredditView.propTypes = {
   index: PropTypes.number.isRequired,
   name: PropTypes.string.isRequired,
-  positionX: PropTypes.number.isRequired,
-  addOne: PropTypes.func.isRequired,
-  togglePause: PropTypes.func.isRequired,
   fetchPost: PropTypes.func.isRequired,
 };
 

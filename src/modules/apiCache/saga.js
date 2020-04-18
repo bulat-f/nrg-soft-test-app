@@ -1,4 +1,4 @@
-import { select, call, put, delay, takeEvery, fork } from 'redux-saga/effects';
+import { select, call, put, delay, takeEvery } from 'redux-saga/effects';
 import { fetchPosts } from 'api';
 
 import { SET_CACHE } from './actionTypes';
